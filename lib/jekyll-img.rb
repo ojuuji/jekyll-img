@@ -35,8 +35,8 @@ class JekyllImgTag < Liquid::Tag
     Jekyll.logger.debug prefix, "image path: '#{path}'"
 
     unless File.file?(path)
-      context.registers[:site].config.key?("theme_root") or raise LoadError, "image '#{path}' could not be found"
-      themed_path = File.join(context.registers[:site].config["theme_root"], relative_path)
+      context.registers[:site].config.key?("local_theme_root") or raise LoadError, "image '#{path}' could not be found"
+      themed_path = File.join(context.registers[:site].config["local_theme_root"], relative_path)
       Jekyll.logger.debug prefix, "themed image path: '#{themed_path}'"
 
       File.file?(themed_path) or raise LoadError, "image '#{path}' or '#{themed_path}' could not be found"
