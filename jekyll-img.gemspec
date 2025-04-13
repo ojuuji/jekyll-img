@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name        = "jekyll-img"
-  spec.version     = "1.1"
+  spec.version     = "1.2"
   spec.summary     = "Jekyll tag img for HTML <img> element for local images"
   spec.description = "Jekyll tag img to verify local image exists and automatically add width and height attributes to generated HTML <img> element."
   spec.authors     = ["Mikalai Ananenka"]
