@@ -1,5 +1,5 @@
-require 'jekyll'
 require 'fastimage'
+require 'jekyll'
 require 'jekyll-img/version'
 
 module Jekyll::Img
@@ -7,6 +7,7 @@ module Jekyll::Img
     def initialize(tag_name, content, tokens)
       super
       @content = content.strip
+      @tag_name = tag_name
     end
 
     def debug(message)
@@ -26,7 +27,7 @@ module Jekyll::Img
         src, rest = m.captures
 
       else
-        raise SyntaxError, "invalid img parameter: '#{@content}'"
+        raise SyntaxError, "#{NAME}: invalid #{@tag_name} tag: '#{@content}'"
       end
 
       debug "src: '#{src}'"
@@ -40,15 +41,15 @@ module Jekyll::Img
       debug "image path: '#{path}'"
 
       unless File.file?(path)
-        theme_root = context.registers[:site].config.dig(NAME, "theme_root") or raise LoadError, "image '#{path}' could not be found"
+        theme_root = context.registers[:site].config.dig(NAME, "theme_root") or raise LoadError, "#{NAME}: image '#{path}' could not be found"
         themed_path = File.join(theme_root, relative_path)
         debug "themed image path: '#{themed_path}'"
 
-        File.file?(themed_path) or raise LoadError, "none of images '#{path}', '#{themed_path}' could be found"
+        File.file?(themed_path) or raise LoadError, "#{NAME}: none of images '#{path}', '#{themed_path}' could be found"
         path = themed_path
       end
 
-      size = FastImage.size(path) or raise LoadError, "could not get size of image '#{path}'"
+      size = FastImage.size(path) or raise LoadError, "#{NAME}: could not get size of image '#{path}'"
       debug "image size: #{size}"
 
       rest = Liquid::Template.parse(rest).render(context)
