@@ -1,11 +1,13 @@
+require_relative 'lib/jekyll-img/version'
+
 Gem::Specification.new do |spec|
-  spec.name        = "jekyll-img"
-  spec.version     = "1.2"
-  spec.summary     = "Jekyll tag img for HTML <img> element for local images"
-  spec.description = "Jekyll tag img to verify local image exists and automatically add width and height attributes to generated HTML <img> element."
+  spec.name        = Jekyll::Img::NAME
+  spec.version     = Jekyll::Img::VERSION
+  spec.summary     = "Jekyll tag for HTML <img> element with auto filled size"
+  spec.description = "Jekyll tag for HTML <img> element which verifies that image exists and automatically adds size attributes."
   spec.authors     = ["Mikalai Ananenka"]
   spec.email       = ["ojuuji@gmail.com"]
-  spec.files       = ["lib/jekyll-img.rb"]
+  spec.files       = Dir["lib/*.rb"]
   spec.homepage    = "https://github.com/ojuuji/jekyll-img"
   spec.license     = "MIT"
   spec.required_ruby_version = ">= 3.0"
